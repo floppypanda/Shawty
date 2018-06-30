@@ -1,0 +1,5 @@
+# Ignoring database directory.
+db
+
+# Ignoring node modules.
+node_modules

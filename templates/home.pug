@@ -1,0 +1,15 @@
+doctype html
+html(lang="en")
+  head
+    title Shawty
+    link(rel='stylesheet', href='main.css')
+  body
+    h1 Shawty
+    p A simple URL shortener written using Express.js and persisted with leveldb.
+    form(action='/shorten', method='POST')
+      div(id='shorten_form_section')
+        p
+          | Enter a URL to shorten:
+        input(type='text', name='url', value='')
+        span(id='span-between-text-and-button')
+        input(type='submit', value='Shawtify')
