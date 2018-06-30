@@ -9,7 +9,7 @@ const kvstore = require('./src/kvstore');
 const shorten = require('./src/shorten');
 
 const app = express();
-const port = 8000; //TODO - Make port configurable.
+const port = process.env.PORT || 8000;
 
 //Using Pug templates for generating HTML.
 app.set('views', path.join(__dirname, 'templates'));
@@ -56,8 +56,12 @@ app.post('/shorten', function (req, res) {
   //TODO - Conduct further validation on URL before passing it through.
   if (inputUrl) {
     const shortenKey = shorten(inputUrl);
-    //TODO - Grab the actual domain of the server regardless of where it is run.
-    const shortUrl = `http://${os.hostname()}:${port}/${shortenKey}`;
+    let shortUrl = '';
+    if (process.env.SERVER_DOMAIN) {
+      shortUrl = `https://${process.env.SERVER_DOMAIN}/${shortenKey}`;
+    } else {
+      shortUrl = `http://${os.hostname()}:${port}/${shortenKey}`;
+    }
     kvstore.putUrlPair(shortenKey, inputUrl, function (err) {
       if (err) {
         return res.send(500);
@@ -74,4 +78,4 @@ app.post('/shorten', function (req, res) {
   }
 });
 //TODO - Change the server to use HTTPS.
-app.listen(process.env.PORT || 8000);
+app.listen(port);
