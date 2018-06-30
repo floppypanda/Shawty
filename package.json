@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "floppypanda",
-  "license": "ISC",
+  "license": "GPL-3.0",
   "dependencies": {
     "crypto": "^1.0.1",
     "express": "^4.16.3",
