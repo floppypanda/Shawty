@@ -57,7 +57,7 @@ app.post('/shorten', function (req, res) {
   if (inputUrl) {
     const shortenKey = shorten(inputUrl);
     //TODO - Grab the actual domain of the server regardless of where it is run.
-    const shortUrl = `http://localhost:${port}/${shortenKey}`;
+    const shortUrl = `http://${os.hostname()}:${port}/${shortenKey}`;
     kvstore.putUrlPair(shortenKey, inputUrl, function (err) {
       if (err) {
         return res.send(500);
