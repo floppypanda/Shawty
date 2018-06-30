@@ -74,4 +74,4 @@ app.post('/shorten', function (req, res) {
   }
 });
 //TODO - Change the server to use HTTPS.
-app.listen(8000);
+app.listen(process.env.PORT || 8000);
