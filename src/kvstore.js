@@ -10,29 +10,22 @@ function init(databaseDir) {
 //Retrieves the URL corresponding to a shorten key.
 function getOriginalUrl(shortenKey, cb) {
   db.get(shortenKey, function (err, value) {
-    if (err) {
-      return cb(err, null);
-    } else {
-      return cb(null, value);
-    }
+    return (err) ? cb(err, null) : cb(null, value);
   });
 }
 
 //Inserted a shorten key and original URL into key-value store.
 function putUrlPair(shortenKey, originalUrl, cb) {
   db.put(shortenKey, originalUrl, function (err) {
-    if (err) {
-      return cb(err);
-    } else {
-      cb();
-    }
+    return (err) ? cb(err) : cb();
   });
 }
 
 //Removes a key-value
 function deleteUrl(shortenKey, cb) {
-  //TODO - Implement.
-  cb();
+  db.del(shortenKey, function (err) {
+    return (err) ? cb(err) : cb();
+  });
 }
 
 module.exports = {
