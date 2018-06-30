@@ -5,8 +5,8 @@ const os = require('os');
 const path = require('path');
 const stylus = require('stylus');
 
-const kvstore = require('./kvstore');
-const shorten = require('./shorten');
+const kvstore = require('./src/kvstore');
+const shorten = require('./src/shorten');
 
 const app = express();
 const port = 8000; //TODO - Make port configurable.
