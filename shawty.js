@@ -4,6 +4,7 @@ const nib = require('nib');
 const os = require('os');
 const path = require('path');
 const stylus = require('stylus');
+const validurl = require('valid-url');
 
 const kvstore = require('./src/kvstore');
 const shorten = require('./src/shorten');
@@ -53,8 +54,7 @@ app.get('/:shawtyKey', function (req, res) {
 });
 app.post('/shorten', function (req, res) {
   const inputUrl = req.body.url;
-  //TODO - Conduct further validation on URL before passing it through.
-  if (inputUrl) {
+  if (validurl.isWebUri(inputUrl)) {
     const shortenKey = shorten(inputUrl);
     let shortUrl = '';
     if (process.env.SERVER_DOMAIN) {
